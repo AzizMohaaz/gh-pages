@@ -1,0 +1,28 @@
+---
+title: "Sample US States Population Size"
+author: "Aziz Mohammed"
+date: "September 11, 2018"
+output: html_document
+---
+
+```{r setup, echo=FALSE}
+library(leaflet)
+us_states <- data.frame(name = c("California", "Florida", "Georgia", "Illinois", "New York",
+                                "Texas", "Minnesota", "Colorado", "South Dakota",
+                                "Mississippi", "Washington"),
+                        pop = c(39250017, 20612439, 10310771, 12801539, 19745289, 27862596,
+                                5628162, 5684203, 877790, 2982785, 7530552),
+                        lat = c(36.116203, 27.766279, 33.040619, 40.349457, 42.165726, 
+                                31.054487, 45.694454, 39.059811, 44.299782, 32.741646, 47.400902),
+                        lng = c(-119.681563, -81.686783, -83.643074, -88.986137, -74.948052,
+                                -97.563461,-93.900192, -105.311104, -99.438828,
+                                -89.678696, -121.490494))
+us_states %>%
+  leaflet() %>%
+  addTiles() %>%
+  # population of each state is shown by clicking at the popup
+  addMarkers(popup = as.character(us_states$pop)) %>% 
+  addCircles(weight = 1, col = "Black", radius = sqrt(us_states$pop) * 70)
+  
+```
+
